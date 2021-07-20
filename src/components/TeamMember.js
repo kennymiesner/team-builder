@@ -9,7 +9,7 @@ export default function Friend(props) {
 
   return (
     <div className='friend container'>
-      <h2>{details.username}</h2>
+      <h2>{details.name}</h2>
       <p>Email: {details.email}</p>
       <p>Role: {details.role}</p>
     </div>

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import Friend from './Friend'
-import FriendForm from './FriendForm'
+import TeamMember from './TeamMember'
+import TeamForm from './TeamForm'
 import axios from '../axios'
 
 // 👉 the shape of the state that drives the form
 const initialFormValues = {
   ///// TEXT INPUTS /////
-  username: '',
+  name: '',
   email: '',
   ///// DROPDOWN /////
   role: '',
 }
 
 export default function App() {
-  const [friends, setFriends] = useState([]) // careful what you initialize your state to
+  const [teamMembers, setTeamMembers] = useState([]) // careful what you initialize your state to
 
   // 🔥 STEP 1 - WE NEED STATE TO HOLD ALL VALUES OF THE FORM!
   const [formValues, setFormValues] = useState(initialFormValues)
@@ -26,37 +26,37 @@ export default function App() {
 
   const submitForm = () => {
     // 🔥 STEP 9 - IMPLEMENT a submit function which will be used inside the form's own `onSubmit`
-    //  a) make a new friend object, trimming whitespace from username and email
-    //  b) prevent further action if either username or email or role is empty string after trimming
+    //  a) make a new friend object, trimming whitespace from name and email
+    //  b) prevent further action if either name or email or role is empty string after trimming
     //  c) POST new friend to backend, and on success update the list of friends in state with the new friend from API
     //  d) also on success clear the form
-    const newFriend = {
-      username: formValues.username.trim(),
+    const newTeamMember = {
+      name: formValues.name.trim(),
       email: formValues.email.trim(),
       role: formValues.role,
     }
-    if (!newFriend.username || !newFriend.email || !newFriend.role) return
+    if (!newTeamMember.name || !newTeamMember.email || !newTeamMember.role) return
 
-    axios.post('fakeapi.com', newFriend)
+    axios.post('fakeapi.com', newTeamMember)
       .then(res => {
-        const friendFromBackend = res.data
-        setFriends([friendFromBackend, ...friends])
+        const teamMemberFromBackend = res.data
+        setTeamMembers([teamMemberFromBackend, ...teamMembers])
         setFormValues(initialFormValues)
       })
 
   }
 
   useEffect(() => {
-    axios.get('fakeapi.com').then(res => setFriends(res.data))
+    axios.get('fakeapi.com').then(res => setTeamMembers(res.data))
   }, [])
 
   return (
     <div className='container'>
-      <h1>Form App</h1>
+      <h1>Team Builder</h1>
 
-      <FriendForm
+      <TeamForm
         // 🔥 STEP 2 - The form component needs its props.
-        //  Check implementation of FriendForm
+        //  Check implementation of TeamForm
         //  to see what props it expects.
         values={formValues}
         update={updateForm}
@@ -64,9 +64,9 @@ export default function App() {
       />
 
       {
-        friends.map(friend => {
+        teamMembers.map(teamMember => {
           return (
-            <Friend key={friend.id} details={friend} />
+            <TeamMember key={teamMember.id} details={teamMember} />
           )
         })
       }

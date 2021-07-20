@@ -1,11 +1,17 @@
 import { v4 as uuid } from 'uuid'
 
-// 👉 the shape of the list of friends from API
-const initialFriendsList = [
+// 👉 the shape of the list of team members from API
+const initialTeamList = [
   {
     id: uuid(), // uuid is a lib to generate random, unique ids
-    username: 'Michael',
-    email: 'michael@michael.com',
+    name: 'Steve Jobs',
+    email: 'steve@apple.com',
+    role: 'Team Lead',
+  },
+  {
+    id: uuid(), // uuid is a lib to generate random, unique ids
+    name: 'Michael Miller',
+    email: 'michael@gmail.com',
     role: 'Student',
   },
 ]
@@ -13,10 +19,10 @@ const initialFriendsList = [
 // 👉 simulating axios for [GET] and [POST]
 export default {
   get() {
-    return Promise.resolve({ status: 200, success: true, data: initialFriendsList })
+    return Promise.resolve({ status: 200, success: true, data: initialTeamList })
   },
-  post(url, { username, email, role }) {
-    const newFriend = { id: uuid(), username, email, role }
-    return Promise.resolve({ status: 200, success: true, data: newFriend })
+  post(url, { name, email, role }) {
+    const newTeamMember = { id: uuid(), name, email, role }
+    return Promise.resolve({ status: 200, success: true, data: newTeamMember })
   }
 }

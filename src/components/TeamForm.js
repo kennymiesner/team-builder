@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function FriendForm(props) {
-  // THESE ARE THE **EXACT PROPS** FriendForm EXPECTS!!!
+export default function TeamForm(props) {
+  // THESE ARE THE **EXACT PROPS** TeamForm EXPECTS!!!
   const { values, update, submit } = props
 
   const onChange = evt => {
@@ -27,17 +27,17 @@ export default function FriendForm(props) {
         {/* ////////// TEXT INPUTS ////////// */}
         {/* ////////// TEXT INPUTS ////////// */}
         {/* ////////// TEXT INPUTS ////////// */}
-        <label htmlFor='username'>Username
-          {/* 🔥 STEP 3 - Make an input of type `text` for username.
+        <label htmlFor='name'>Name
+          {/* 🔥 STEP 3 - Make an input of type `text` for name.
               Controlled inputs need `value` and `onChange` props.
               Inputs render what they're told - their current value comes from app state.
               At each keystroke, a change handler fires to change app state. */}
             <input
-              id='username'
+              id='name'
               type='text'
-              name='username'
+              name='name'
               onChange={onChange}
-              value={values.username}
+              value={values.name}
             />
         </label>
 
